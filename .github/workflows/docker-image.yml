@@ -24,6 +24,8 @@ jobs:
 
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
         name: Release ${{ github.ref }}
@@ -34,5 +36,3 @@ jobs:
           wxbot-0nion.tar
           application.properties
           docker-compose.yaml
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
