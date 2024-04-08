@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Move useful files
+      run: |
+        mkdir build
+        mv lib ./build
+        mv *.jar ./build
+        
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag wxbot-0nion:latest
+        docker save -o wxbot-0nion.tar wxbot-0nion:latest
