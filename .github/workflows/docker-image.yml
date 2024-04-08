@@ -21,14 +21,17 @@ jobs:
       run: |
         docker build . --file Dockerfile --tag wxbot-0nion:latest
         docker save -o wxbot-0nion.tar wxbot-0nion:latest
-        mkdir publish
-        mv wxbot-0nion.tar ./publish
 
-    - name: Publish
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: git@github.com:0niros/wxRobot-0nion-publish.git
-        BRANCH: master
-        FOLDER: publish
-        SSH_PRIVATE_KEY: ${{ secrets.ACTION_DEPLOY_SECRET }}
-        CLEAR_GLOBS_FILE: ".clear-target-files"
+    - name: Create Release and Upload Release Asset
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ github.ref }}
+        name: Release ${{ github.ref }}
+        body: TODO New Release.
+        draft: false
+        prerelease: false
+        files: |
+          wxbot-0nion.tar
+          application.properties
+          docker-compose.yaml
