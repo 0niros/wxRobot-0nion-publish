@@ -21,6 +21,8 @@ jobs:
       run: |
         docker build . --file Dockerfile --tag wxbot-0nion:latest
         docker save -o wxbot-0nion.tar wxbot-0nion:latest
+        mkdir publish
+        mv wxbot-0nion.tar ./publish
 
     - name: Publish
       uses: s0/git-publish-subdir-action@develop
