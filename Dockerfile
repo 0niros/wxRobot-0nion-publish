@@ -1,8 +1,6 @@
-FROM ubuntu:22.04
-
-RUN apt update && apt install -y openjdk-17-jre-headless
+FROM ubuntu/jre:17-22.04_41
 
 ADD build /app
 WORKDIR /app
 
-CMD ["sh", "/app/startup.sh"]
+ENTRYPOINT ["sh", "/app/startup.sh"]
