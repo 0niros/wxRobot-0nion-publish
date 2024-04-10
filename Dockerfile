@@ -1,6 +1,8 @@
-FROM ubuntu/jre:17-22.04_41
+FROM ubuntu:22.04
+
+RUN apt install -y openjdk-17-jre-headless
 
 ADD build /app
 WORKDIR /app
 
-ENTRYPOINT ["/opt/java/bin/java", "-Djava.io.tmpdir=/app/tmp" ,"-classpath", "/app/*:/app/lib/*", "cn.com.oniros.WxRobotApplication", "--spring.config.location=/etc/wxbot/application.properties"]
+ENTRYPOINT ["/bin/sh", "/app/startup.sh"]
