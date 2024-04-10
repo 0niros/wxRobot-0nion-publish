@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt install -y openjdk-17-jre-headless
+RUN apt update && apt install -y openjdk-17-jre-headless
 
 ADD build /app
 WORKDIR /app
