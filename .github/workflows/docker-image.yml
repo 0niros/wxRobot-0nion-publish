@@ -16,6 +16,7 @@ jobs:
         mkdir build
         mv startup.sh ./build
         mv lib ./build
+        mkdir ./build/tmp
         mv *.jar ./build
         
     - name: Build the Docker image
